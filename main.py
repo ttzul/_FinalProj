@@ -15,20 +15,20 @@ class MyDialog(QtWidgets.QDialog, Ui_Dialog):
         super().__init__()
         self.fg_image = None
         self.trimap = None
+        self.alpha_matte = None
         self.bg_image = None
+        self.res_image = None
 
+        self.matting_args = matting.args_init()
+        self.matting_model = matting.model_load(self.matting_args)
+        
         self.setupUi(self)
-        self.pushButton.clicked.connect(self.select_foreground)
-        self.pushButton_2.clicked.connect(self.change_fg_to_gray)    
+        self.select_fg.clicked.connect(self.select_foreground)
+        self.select_tri.clicked.connect(self.select_trimap)  
+        self.select_bg.clicked.connect(self.select_background)
+        self.pre_alpha.clicked.connect(self.predict_alpha)
+        self.com.clicked.connect(self.compose)
 
-    def change_fg_to_gray(self):
-        print("Change Foreground to Gray button clicked")
-        if self.fg_image is None:
-            print("Foreground image is not selected")
-            return
-        fg_gray = cv2.cvtColor(self.fg_image, cv2.COLOR_BGR2GRAY)
-        fg_gray = cv2.cvtColor(fg_gray, cv2.COLOR_GRAY2BGR)
-        self.show_image(fg_gray, self.graphicsView)
 
     def qimg2np(self, qimg):
         qimg = qimg.convertToFormat(QtGui.QImage.Format.Format_RGB888)
@@ -70,7 +70,38 @@ class MyDialog(QtWidgets.QDialog, Ui_Dialog):
         self.fg_image = self.select_image()
         if self.fg_image is None:
             return
-        self.show_image(self.fg_image, self.graphicsView)
+        self.show_image(self.fg_image, self.fg)
+
+    def select_trimap(self):
+        self.trimap = self.select_image()
+        if self.trimap is None:
+            return
+        self.show_image(self.trimap, self.tri)
+
+    def select_background(self):
+        self.bg_image = self.select_image()
+        if self.bg_image is None:
+            return
+        self.show_image(self.bg_image, self.bg)
+
+    def predict_alpha(self):
+        if self.fg_image is None or self.trimap is None:
+            print("Foreground image or trimap is not selected")
+            return
+        self.alpha_matte = matting.matting(self.matting_args, self.matting_model, self.fg_image, self.trimap)
+        print(self.alpha_matte.shape)
+        print(self.alpha_matte.max())
+        print(self.alpha_matte.min())
+        self.show_image(self.alpha_matte, self.alpha)
+
+    def compose(self):
+        if self.fg_image is None or self.trimap is None:
+            print("Foreground image or background image or trimap is not selected")
+            return
+        self.res_image = matting.composing(self.fg_image, self.alpha_matte, self.bg_image)
+        self.show_image(self.res_image, self.com_res)
+
+    
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

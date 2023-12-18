@@ -6,30 +6,70 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1167</width>
-    <height>588</height>
+    <width>1280</width>
+    <height>720</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QGroupBox" name="groupBox">
+  <widget class="QGroupBox" name="matting_tool">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>10</y>
-     <width>1011</width>
-     <height>71</height>
+     <y>20</y>
+     <width>831</width>
+     <height>531</height>
     </rect>
    </property>
    <property name="title">
     <string>Matting</string>
    </property>
+   <widget class="QGraphicsView" name="fg">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>260</width>
+      <height>192</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QGraphicsView" name="tri">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>40</y>
+      <width>260</width>
+      <height>192</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QGraphicsView" name="alpha">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>40</y>
+      <width>260</width>
+      <height>192</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QGraphicsView" name="bg">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>280</y>
+      <width>260</width>
+      <height>192</height>
+     </rect>
+    </property>
+   </widget>
    <widget class="QPushButton" name="select_fg">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>20</y>
+      <x>70</x>
+      <y>240</y>
       <width>140</width>
       <height>28</height>
      </rect>
@@ -38,29 +78,13 @@
      <string>Select Foreground</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="select_tri">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>20</y>
-      <width>140</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="mouseTracking">
-     <bool>false</bool>
-    </property>
-    <property name="text">
-     <string>Select Trimap</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="gen_tri">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>20</y>
-      <width>140</width>
-      <height>28</height>
+      <x>400</x>
+      <y>240</y>
+      <width>120</width>
+      <height>30</height>
      </rect>
     </property>
     <property name="mouseTracking">
@@ -70,11 +94,27 @@
      <string>Generate Trimap</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="select_tri">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>240</y>
+      <width>100</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="mouseTracking">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>Select Trimap</string>
+    </property>
+   </widget>
    <widget class="QPushButton" name="pre_alpha">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>20</y>
+      <x>600</x>
+      <y>240</y>
       <width>140</width>
       <height>28</height>
      </rect>
@@ -89,8 +129,8 @@
    <widget class="QPushButton" name="select_bg">
     <property name="geometry">
      <rect>
-      <x>600</x>
-      <y>20</y>
+      <x>170</x>
+      <y>480</y>
       <width>140</width>
       <height>28</height>
      </rect>
@@ -102,11 +142,11 @@
      <string>Select Background</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="select_tri_3">
+   <widget class="QPushButton" name="com">
     <property name="geometry">
      <rect>
-      <x>750</x>
-      <y>20</y>
+      <x>450</x>
+      <y>480</y>
       <width>140</width>
       <height>28</height>
      </rect>
@@ -115,60 +155,78 @@
      <bool>false</bool>
     </property>
     <property name="text">
-     <string>Select Background</string>
+     <string>Compose</string>
+    </property>
+   </widget>
+   <widget class="QGraphicsView" name="com_res">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>280</y>
+      <width>260</width>
+      <height>192</height>
+     </rect>
     </property>
    </widget>
   </widget>
-  <widget class="QGroupBox" name="groupBox_2">
+  <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>120</y>
-     <width>1121</width>
-     <height>361</height>
+     <x>850</x>
+     <y>20</y>
+     <width>211</width>
+     <height>531</height>
     </rect>
    </property>
    <property name="title">
-    <string>Preview</string>
+    <string>Save Result</string>
    </property>
-   <widget class="QGraphicsView" name="fg">
+   <widget class="QPushButton" name="save_tri">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>20</x>
       <y>40</y>
-      <width>256</width>
-      <height>192</height>
+      <width>140</width>
+      <height>28</height>
      </rect>
     </property>
-   </widget>
-   <widget class="QGraphicsView" name="tri">
-    <property name="geometry">
-     <rect>
-      <x>280</x>
-      <y>40</y>
-      <width>256</width>
-      <height>192</height>
-     </rect>
+    <property name="mouseTracking">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>Save Trimap</string>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="alpha">
+   <widget class="QPushButton" name="save_alpha">
     <property name="geometry">
      <rect>
-      <x>550</x>
-      <y>40</y>
-      <width>256</width>
-      <height>192</height>
+      <x>20</x>
+      <y>80</y>
+      <width>140</width>
+      <height>28</height>
      </rect>
     </property>
+    <property name="mouseTracking">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>Save Alpha Matte</string>
+    </property>
    </widget>
-   <widget class="QGraphicsView" name="res">
+   <widget class="QPushButton" name="save_com">
     <property name="geometry">
      <rect>
-      <x>820</x>
-      <y>40</y>
-      <width>256</width>
-      <height>192</height>
+      <x>20</x>
+      <y>120</y>
+      <width>140</width>
+      <height>28</height>
      </rect>
+    </property>
+    <property name="mouseTracking">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>Save Compose Image</string>
     </property>
    </widget>
   </widget>
